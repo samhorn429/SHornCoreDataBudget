@@ -1,0 +1,372 @@
+[
+	{
+        "subCategory": "Rent",
+        "category": "Rent/Mortgage",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Mortgage",
+        "category": "Rent/Mortgage",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Maintenance and Lawn Care",
+        "category": "Rent/Mortgage",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "HOA Dues",
+        "category": "Rent/Mortgage",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Groceries",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Electricity",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Internet",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Heating",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Water",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Sewer",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Telephone",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Cable",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Utilities",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Fuel",
+        "category": "Transportation",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Repairs and Oil Changes",
+        "category": "Transportation",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Parking Fees",
+        "category": "Transportation",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Public Transport",
+        "category": "Transportation",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Transportation",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Medical",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Dental",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Vision",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Mortgage/Renters",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Car",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Life",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Insurance",
+        "group": "Essentials"
+    },
+    {
+        "subCategory": "Credit Cards",
+        "category": "Debt",
+        "group": "Debt"
+    },
+    {
+        "subCategory": "Student Loans",
+        "category": "Debt",
+        "group": "Debt"
+    },
+    {
+        "subCategory": "Medical",
+        "category": "Debt",
+        "group": "Debt"
+    },
+    {
+        "subCategory": "Personal",
+        "category": "Debt",
+        "group": "Debt"
+    },
+    {
+        "subCategory": "Car Payments",
+        "category": "Debt",
+        "group": "Debt"
+    },
+    {
+        "subCategory": "Others",
+        "category": "Debt",
+        "group": "Debt"
+    },
+    {
+        "subCategory": "Emergency Fund",
+        "category": "Savings",
+        "group": "Savings"
+    },
+    {
+        "subCategory": "Retirement",
+        "category": "Savings",
+        "group": "Savings"
+    },
+    {
+        "subCategory": "Travel/Vacation",
+        "category": "Savings",
+        "group": "Savings"
+    },
+    {
+        "subCategory": "Car Replacement",
+        "category": "Savings",
+        "group": "Savings"
+    },
+    {
+        "subCategory": "College Fund",
+        "category": "Savings",
+        "group": "Savings"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Savings",
+        "group": "Savings"
+    },
+    {
+        "subCategory": "Tithes",
+        "category": "Giving",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Charity",
+        "category": "Giving",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Gifts",
+        "category": "Giving",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Holidays",
+        "category": "Giving",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Giving",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Daycare",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Private School",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Babysitter",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Kids' Clothes",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Extracurricular Activities",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Allowance",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Children",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Cosmetics",
+        "category": "Personal Care",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Haircuts",
+        "category": "Personal Care",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Massage and Spa",
+        "category": "Personal Care",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Gym Memberships",
+        "category": "Personal Care",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Personal Care",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Necessary Clothes",
+        "category": "Clothes",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Fashionable Clothes",
+        "category": "Clothes",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Dry Cleaning",
+        "category": "Clothes",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Clothes",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Toiletries",
+        "category": "Household Items",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Cleaning Supplies",
+        "category": "Household Items",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Appliances",
+        "category": "Household Items",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Tools",
+        "category": "Household Items",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Technology",
+        "category": "Household Items",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Household Items",
+        "group": "Everyday Items and Services"
+    },
+    {
+        "subCategory": "Sporting Events",
+        "category": "Recreation & Fun",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Concerts and Movies",
+        "category": "Recreation & Fun",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Bars/Restaurants",
+        "category": "Recreation & Fun",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Hobbies",
+        "category": "Recreation & Fun",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Streaming Services",
+        "category": "Subscriptions",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Music",
+        "category": "Subscriptions",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Magazines",
+        "category": "Subscriptions",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Other Software",
+        "category": "Subscriptions",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Other",
+        "category": "Subscriptions",
+        "group": "Recreation & Fun"
+    },
+    {
+        "subCategory": "Miscellaneous Items",
+        "category": "Miscellaneous Items",
+        "group": "Recreation & Fun"
+    }
+]

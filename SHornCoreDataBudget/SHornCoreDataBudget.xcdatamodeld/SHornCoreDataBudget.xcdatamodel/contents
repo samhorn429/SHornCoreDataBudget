@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="20G80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PayCheckMO" representedClassName="PayCheckMO" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="pcid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SubCategoryMO" representedClassName="SubCategoryMO" syncable="YES" codeGenerationType="class">
+        <attribute name="category" optional="YES" attributeType="String"/>
+        <attribute name="group" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="subCategory" optional="YES" attributeType="String"/>
+        <relationship name="transactions" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="UserTransaction" inverseName="subCategory" inverseEntity="UserTransaction"/>
+        <relationship name="userCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserCategory" inverseName="subCategory" inverseEntity="UserCategory"/>
+    </entity>
+    <entity name="UserCategory" representedClassName="UserCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="actualAmount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="budgetAmount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="scid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="ucid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="subCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubCategoryMO" inverseName="userCategory" inverseEntity="SubCategoryMO"/>
+    </entity>
+    <entity name="UserTransaction" representedClassName="UserTransaction" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="merchant" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="scid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="tid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <relationship name="subCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubCategoryMO" inverseName="transactions" inverseEntity="SubCategoryMO"/>
+    </entity>
+    <elements>
+        <element name="PayCheckMO" positionX="-489.475341796875" positionY="346.9610290527344" width="128" height="89"/>
+        <element name="SubCategoryMO" positionX="87.006591796875" positionY="225.0818786621094" width="128" height="14"/>
+        <element name="UserCategory" positionX="-199.949951171875" positionY="31.96629333496094" width="128" height="133"/>
+        <element name="UserTransaction" positionX="-643.59814453125" positionY="108.5858459472656" width="128" height="134"/>
+    </elements>
+</model>
