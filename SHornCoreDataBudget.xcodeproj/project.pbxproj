@@ -11,16 +11,17 @@
 		200A0066276556BC00283282 /* BudgetMonthAndYearManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A0065276556BB00283282 /* BudgetMonthAndYearManager.swift */; };
 		200A0068276570D600283282 /* CurrentDateFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A0067276570D500283282 /* CurrentDateFunctions.swift */; };
 		200A006A2766A01A00283282 /* CoreDataMOFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200A00692766A01800283282 /* CoreDataMOFunctions.swift */; };
+		2027001F279B5BB0003885E3 /* SubCategoryMOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2027001E279B5BB0003885E3 /* SubCategoryMOManager.swift */; };
 		204C9B332752EFCE0041E269 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 204C9B322752EFCE0041E269 /* TransactionView.swift */; };
-		205382E72744C43500BC8E4B /* PayCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382E62744C43500BC8E4B /* PayCheckManager.swift */; };
 		205382E92744C4AA00BC8E4B /* PayCheckModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382E82744C4AA00BC8E4B /* PayCheckModel.swift */; };
 		205382ED2745ED0300BC8E4B /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382EC2745ED0000BC8E4B /* HomePageView.swift */; };
 		205382EF2745F9F600BC8E4B /* PieChartViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382EE2745F9F400BC8E4B /* PieChartViews.swift */; };
 		205382F12747028600BC8E4B /* BudgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382F02747028500BC8E4B /* BudgetView.swift */; };
 		205382F3274707AB00BC8E4B /* SetBudgetCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382F2274707AB00BC8E4B /* SetBudgetCategoryView.swift */; };
-		205382F5274981D300BC8E4B /* UserCategorySubmitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382F4274981D200BC8E4B /* UserCategorySubmitManager.swift */; };
 		205382F72749E5B500BC8E4B /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382F62749E5B300BC8E4B /* ColorExtensions.swift */; };
 		205382FB274A02FB00BC8E4B /* SubCategoryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205382FA274A02FB00BC8E4B /* SubCategoryExtensions.swift */; };
+		2072B12627968AF700C932C2 /* MoneyValuesOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2072B12527968AF700C932C2 /* MoneyValuesOnly.swift */; };
+		2072B12827971F6100C932C2 /* NewPayChecksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2072B12727971F6100C932C2 /* NewPayChecksView.swift */; };
 		20C61406273B77DF00D8E45B /* SubCategoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C61405273B77DE00D8E45B /* SubCategoriesModel.swift */; };
 		20C6140C273BA10500D8E45B /* SubCategoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C6140B273BA10500D8E45B /* SubCategoriesManager.swift */; };
 		20C6140E273BA1C000D8E45B /* BudgetCategoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C6140D273BA1C000D8E45B /* BudgetCategoriesManager.swift */; };
@@ -59,16 +60,17 @@
 		200A0065276556BB00283282 /* BudgetMonthAndYearManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetMonthAndYearManager.swift; sourceTree = "<group>"; };
 		200A0067276570D500283282 /* CurrentDateFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDateFunctions.swift; sourceTree = "<group>"; };
 		200A00692766A01800283282 /* CoreDataMOFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataMOFunctions.swift; sourceTree = "<group>"; };
+		2027001E279B5BB0003885E3 /* SubCategoryMOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryMOManager.swift; sourceTree = "<group>"; };
 		204C9B322752EFCE0041E269 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
-		205382E62744C43500BC8E4B /* PayCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCheckManager.swift; sourceTree = "<group>"; };
 		205382E82744C4AA00BC8E4B /* PayCheckModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCheckModel.swift; sourceTree = "<group>"; };
 		205382EC2745ED0000BC8E4B /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		205382EE2745F9F400BC8E4B /* PieChartViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViews.swift; sourceTree = "<group>"; };
 		205382F02747028500BC8E4B /* BudgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetView.swift; sourceTree = "<group>"; };
 		205382F2274707AB00BC8E4B /* SetBudgetCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBudgetCategoryView.swift; sourceTree = "<group>"; };
-		205382F4274981D200BC8E4B /* UserCategorySubmitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCategorySubmitManager.swift; sourceTree = "<group>"; };
 		205382F62749E5B300BC8E4B /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		205382FA274A02FB00BC8E4B /* SubCategoryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoryExtensions.swift; sourceTree = "<group>"; };
+		2072B12527968AF700C932C2 /* MoneyValuesOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyValuesOnly.swift; sourceTree = "<group>"; };
+		2072B12727971F6100C932C2 /* NewPayChecksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPayChecksView.swift; sourceTree = "<group>"; };
 		20C61405273B77DE00D8E45B /* SubCategoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesModel.swift; sourceTree = "<group>"; };
 		20C6140B273BA10500D8E45B /* SubCategoriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesManager.swift; sourceTree = "<group>"; };
 		20C6140D273BA1C000D8E45B /* BudgetCategoriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCategoriesManager.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		20A1BC942755878E004E0A25 /* Core Data Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				200A00692766A01800283282 /* CoreDataMOFunctions.swift */,
 				205382FA274A02FB00BC8E4B /* SubCategoryExtensions.swift */,
 			);
 			path = "Core Data Extensions";
@@ -138,9 +141,8 @@
 			children = (
 				20C6140D273BA1C000D8E45B /* BudgetCategoriesManager.swift */,
 				20C6141D273CA72D00D8E45B /* CategoryBudgetAmounts.swift */,
-				205382E62744C43500BC8E4B /* PayCheckManager.swift */,
-				205382F4274981D200BC8E4B /* UserCategorySubmitManager.swift */,
 				200A0065276556BB00283282 /* BudgetMonthAndYearManager.swift */,
+				2027001E279B5BB0003885E3 /* SubCategoryMOManager.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -161,6 +163,7 @@
 				205382F02747028500BC8E4B /* BudgetView.swift */,
 				205382F2274707AB00BC8E4B /* SetBudgetCategoryView.swift */,
 				204C9B322752EFCE0041E269 /* TransactionView.swift */,
+				2072B12727971F6100C932C2 /* NewPayChecksView.swift */,
 			);
 			path = "Core Data Views";
 			sourceTree = "<group>";
@@ -172,7 +175,7 @@
 				20C73C022733495400252E93 /* SHornCoreDataBudgetApp.swift */,
 				20C6141B273C930F00D8E45B /* ViewConstants.swift */,
 				200A0067276570D500283282 /* CurrentDateFunctions.swift */,
-				200A00692766A01800283282 /* CoreDataMOFunctions.swift */,
+				2072B12527968AF700C932C2 /* MoneyValuesOnly.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2027001F279B5BB0003885E3 /* SubCategoryMOManager.swift in Sources */,
 				20C73C0F2733495D00252E93 /* SHornCoreDataBudget.xcdatamodeld in Sources */,
 				200A0066276556BC00283282 /* BudgetMonthAndYearManager.swift in Sources */,
 				20C6140C273BA10500D8E45B /* SubCategoriesManager.swift in Sources */,
@@ -383,13 +387,13 @@
 				205382F3274707AB00BC8E4B /* SetBudgetCategoryView.swift in Sources */,
 				200A006A2766A01A00283282 /* CoreDataMOFunctions.swift in Sources */,
 				205382F72749E5B500BC8E4B /* ColorExtensions.swift in Sources */,
-				205382E72744C43500BC8E4B /* PayCheckManager.swift in Sources */,
 				20C61406273B77DF00D8E45B /* SubCategoriesModel.swift in Sources */,
 				200A0068276570D600283282 /* CurrentDateFunctions.swift in Sources */,
+				2072B12827971F6100C932C2 /* NewPayChecksView.swift in Sources */,
 				205382EF2745F9F600BC8E4B /* PieChartViews.swift in Sources */,
 				205382E92744C4AA00BC8E4B /* PayCheckModel.swift in Sources */,
 				20C73C032733495400252E93 /* SHornCoreDataBudgetApp.swift in Sources */,
-				205382F5274981D300BC8E4B /* UserCategorySubmitManager.swift in Sources */,
+				2072B12627968AF700C932C2 /* MoneyValuesOnly.swift in Sources */,
 				20C6141E273CA72E00D8E45B /* CategoryBudgetAmounts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

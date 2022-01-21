@@ -12,6 +12,11 @@ import CoreData
 struct BudgetView: View {
     @Environment(\.managedObjectContext) var viewContext
     @FetchRequest(
+        entity: UserCategory.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \UserCategory.ucid, ascending: true)],
+        animation: .default)
+    var userCategories: FetchedResults<UserCategory>
+    @FetchRequest(
         entity: SubCategoryMO.entity(),
         sortDescriptors: [NSSortDescriptor(keyPath: \SubCategoryMO.group, ascending: true)],
         animation: .default)
@@ -34,10 +39,9 @@ struct BudgetView: View {
     @AppStorage("recentBudgetMonth") var recentBudgetMonth: String = ""
     @AppStorage("recentBudgetYear") var recentBudgetYear: String = ""
     @EnvironmentObject var budgetManager: BudgetCategoriesManager
-    @EnvironmentObject var ucSubmitManager: UserCategorySubmitManager
     @EnvironmentObject var budgetDateManager: BudgetMonthAndYearManager
     @State var managersPopulated = false
-    @FocusState var focusSubCategory: String?
+    @FocusState var focusSubCategory: UUID?
     @Binding var navBarHidden: Bool
     @State var showSubCategoryForm: Bool = false
     @State var showExceedingBudgetForm: Bool = false
@@ -45,6 +49,13 @@ struct BudgetView: View {
     @State var toolBarButtonsHidden: Bool = false
     @State var showNewBudgetModal: Bool = false
     @State var isShown = true
+    @State var titleText: String = ""
+    @State var amountText: String = ""
+    @State var payCheckDate: Date = Date()
+    @FocusState var isFocusedOnTitle: Bool?
+    @State var showAddConfirmDialog: Bool = false
+    @State var showNewPayCheckTitleAlert: Bool = false
+    @State var showNewPayCheckAmountAlert: Bool = false
 
     var totalIncome: Float {
         var totalIncome: Float = 0.00
@@ -70,48 +81,51 @@ struct BudgetView: View {
         return categoryTotal
     }
     
-    private func navLink<Destination: View>(category: Category, destination: Destination) -> some View {
-        return NavigationLink(destination: destination) {
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(category.category)
-                        .bold()
-                        .font(.title2)
-                }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text("$\(String(format: "%.2f", getCategoryBudgetTotal(category: category)))")
-                        .font(.title2)
-                }
-            }
-            .padding()
-        }
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    Section(header: Text("Income").bold()) {
-                        IncomeDisclosureGroup(payChecks: payChecks)
-                            .environment(\.managedObjectContext, viewContext)
+                    Section(header:
+                        HStack {
+                            Text("Income").bold()
+                            Spacer()
+                        NavigationLink(destination:
+                            NewPayChecksView(
+                                payChecks: payChecks,
+                                isNewPayCheck: true
+                            ).environment(\.managedObjectContext, viewContext)) {
+                                Image(systemName: "plus")
+                                    .imageScale(.large)
+                            }
+                        }
+                    ) {
+                        ForEach(payChecks) {payCheck in
+                            NavigationLink(destination:
+                                NewPayChecksView(
+                                    payChecks: payChecks,
+                                    isNewPayCheck: false
+                                ).environment(\.managedObjectContext, viewContext)) {
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(payCheck.title ?? "")
+                                                .bold()
+                                                .font(.title2)
+                                        }
+                                        Spacer()
+                                        VStack(alignment: .trailing) {
+                                            Text("$\(String(format: "%.2f", payCheck.amount))")
+                                                .font(.title2)
+                                        }
+                                    }
+                                    .padding()
+                                }
+                        }
                     }
                     ForEach(budgetManager.groups.indices) {groupIndex in
                         Section(header: Text(budgetManager.groups[groupIndex])) {
                             ForEach(budgetManager.categories.filter({
                                 $0.group == budgetManager.groups[groupIndex]})) {
                                     category in
-//                                    navLink(category: category, destination:
-//                                                BudgetCategoryView(
-//                                                    navBarHidden: $navBarHidden,
-//                                                    subCategories: subCategories,
-//                                                    category: category,
-//                                                    focusSubCategory: _focusSubCategory,
-//                                                    toolBarButtonsHidden: $toolBarButtonsHidden)
-//                                                        .environment(\.managedObjectContext, viewContext)
-//                                                        .environmentObject(budgetManager)
-//                                                            .environmentObject(ucSubmitManager)
-//                                    )
                                     NavigationLink(destination:
                                                     BudgetCategoryView(
                                                         navBarHidden: $navBarHidden,
@@ -120,16 +134,6 @@ struct BudgetView: View {
                                                         focusSubCategory: _focusSubCategory,
                                                         toolBarButtonsHidden: $toolBarButtonsHidden)
                                                             .environment(\.managedObjectContext, viewContext)
-                                                            .environmentObject(budgetManager)
-                                                                .environmentObject(ucSubmitManager)
-//                                                    .onDisappear {
-//                                        if (isShown) {
-//                                            refreshId = UUID()
-//                                        }
-//                                    }
-//                                                    .onAppear {
-//                                        isShown = false
-//                                    }
                                     ) {
                                         HStack {
                                             VStack(alignment: .leading) {
@@ -148,9 +152,23 @@ struct BudgetView: View {
                                 }
                         }
                     }
-                    HStack {
-                        Spacer()
-                        Button(action:{
+                }
+                .navigationBarTitle("Set Budget", displayMode: .inline)
+                .navigationBarBackButtonHidden(true)
+                .alert("Amounts Entered for Budget Categories Exceed Income", isPresented: $showExceedingBudgetForm, actions: {})
+                .navigationBarItems(//trailing: (
+                    leading:
+                        Button("Undo Changes", action: {
+                            if !(CurrentDateFunctions.currentYear == budgetDateManager.recentBudgetYear
+                                 && CurrentDateFunctions.currentMonth == budgetDateManager.recentBudgetMonth) {
+                                showNewBudgetModal = true
+                            }
+                            viewContext.undo()
+                            presentationMode.wrappedValue.dismiss()
+                        }),
+                    
+                    trailing:
+                        Button("Save Changes", action: {
                             let totalIncome = totalIncome
                             let totalBudgetAmount = totalBudgetAmount
                             if totalBudgetAmount > totalIncome {
@@ -159,61 +177,22 @@ struct BudgetView: View {
                                 if totalBudgetAmount < totalIncome {
                                     adjustMiscellaneousBudget(totalIncome: totalIncome, totalBudgetAmount: totalBudgetAmount)
                                 }
-                                
+
                                 do {
                                     try viewContext.save()
                                     presentationMode.wrappedValue.dismiss()
                                 } catch {
                                     print(error)
                                 }
-                                
+
                                 budgetDateManager.recentBudgetYear = CurrentDateFunctions.currentYear
                                 budgetDateManager.recentBudgetMonth = CurrentDateFunctions.currentMonth
                             }
-                            
-                        }) {
-                            SetBudgetButtonBackground(text: "Save Changes")
-                        }
-                        Spacer()
-                    }
-                        //Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            if !(CurrentDateFunctions.currentYear == budgetDateManager.recentBudgetYear && CurrentDateFunctions.currentMonth == budgetDateManager.recentBudgetMonth) {
-                                showNewBudgetModal = true
-                            }
-                            viewContext.undo()
-                            
-                            do {
-                                try viewContext.save()
-                                presentationMode.wrappedValue.dismiss()
-                            } catch {
-                                print(error)
-                            }
-                            
-                        }) {
-                            SetBudgetButtonBackground(text: "Undo Changes")
-                        }
-                        Spacer()
-                    }
-                   // }
-                    //.padding()
-                }
-//                .onAppear {
-//                    isShown = true
-//                }
-//                .toolbar(content: {
-//                    ToolbarItem(placement: .bottomBar) {
-//
-//                    }
-//
-//                })
-//                .id(refreshId)
-                .navigationBarTitle("Set Budget", displayMode: .inline)
-                .alert("Amounts Entered for Budget Categories Exceed Income", isPresented: $showExceedingBudgetForm, actions: {})
+                        })
+                )
             }
         }
+        .navigationBarBackButtonHidden(true)
         .fullScreenCover(isPresented: $showNewBudgetModal) {
             VStack(spacing: UIScreen.main.bounds.height/25) {
                 Text("Time to Set a New Budget")
@@ -289,6 +268,63 @@ struct BudgetView: View {
                 }
                 isInitialSubCategories = false
             }
+        }
+        .sheet(isPresented: $showAddConfirmDialog, onDismiss: {}) {
+            
+            Form {
+                Text("PayCheck Name:")
+                    .bold()
+                    .font(.title2)
+                TextField("PayCheck Name", text: $titleText)
+                    .focused($isFocusedOnTitle, equals: true)
+                
+                Text("PayCheck Amount:")
+                    .bold()
+                    .font(.title2)
+                TextField("PayCheck Amount", text: $amountText)
+                    .focused($isFocusedOnTitle, equals: false)
+                Text("Date of Payment:")
+                    .bold()
+                    .font(.title2)
+                DatePicker(
+                    "PayCheck Date",
+                    selection: $payCheckDate,
+                    displayedComponents: [.date]
+                )
+                
+                Button(action: {
+                    if titleText != "" {
+                        if let floatNewPayCheckAmount = Float(amountText) {
+                            if floatNewPayCheckAmount <= 0.00 {
+                                showNewPayCheckAmountAlert = true
+                                isFocusedOnTitle = false
+                            } else {
+                                let newPayCheck = PayCheckMO(context: viewContext)
+                                newPayCheck.pcid = UUID()
+                                newPayCheck.title = titleText
+                                newPayCheck.amount = floatNewPayCheckAmount
+                                newPayCheck.date = payCheckDate
+
+                                titleText = ""
+                                amountText = ""
+                                payCheckDate = Date()
+                                showAddConfirmDialog = false
+                            }
+                        } else {
+                            showNewPayCheckAmountAlert = true
+                            isFocusedOnTitle = false
+                        }
+                    } else {
+                        showNewPayCheckTitleAlert = true
+                        isFocusedOnTitle = true
+                    }
+                }) {
+                    SetBudgetButtonBackground(text: "Add PayCheck")
+                }
+            }
+            .alert("Please Enter PayCheck Name", isPresented: $showNewPayCheckTitleAlert, actions: {})
+            .alert("Please Enter Valid PayCheck Amount Greater Than Zero", isPresented: $showNewPayCheckAmountAlert, actions: {})
+            
         }
     }
     
@@ -441,7 +477,6 @@ struct IncomeEntryView: View {
 
     @Environment(\.managedObjectContext) var viewContext
     var payCheck: PayCheckMO
-    //@EnvironmentObject var payCheckManager: PayCheckManager
     @State var incomeAmountText: String
     @FocusState var focusIncomeId: UUID?
     @State var showInvalidInputAlert: Bool = false

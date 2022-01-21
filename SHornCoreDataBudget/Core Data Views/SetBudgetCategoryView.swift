@@ -20,12 +20,10 @@ struct BudgetCategoryView: View {
     var userCategories: FetchedResults<UserCategory>
     var category: Category
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var budgetManager: BudgetCategoriesManager
-    @EnvironmentObject var ucSubmitManager: UserCategorySubmitManager
-    @FocusState var focusSubCategory: String?
+    @FocusState var focusSubCategory: UUID?
     @Binding var toolBarButtonsHidden: Bool
     @State var buttonPressed: Bool = false
-    
+    @State var showMenu: Bool = false
     
     var body: some View {
         NavigationView {
@@ -37,62 +35,18 @@ struct BudgetCategoryView: View {
                     subCategory in
                     SubCategoryView(
                         subCategory: subCategory,
-                        budgetAmountText: "\(subCategory.userCategory?.budgetAmount ?? 0.00)",
+                        budgetAmountText: MoneyValueText(subCategory: subCategory),
                         focusSubCategory: _focusSubCategory
                     )
                         .environment(\.managedObjectContext, viewContext)
-                        .environmentObject(ucSubmitManager)
-                }
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        for scid in ucSubmitManager.ucBudgetDict.keys {
-                            let subCategory = subCategories.first(where: {
-                                $0.id == scid
-                            })!
-                            if ucSubmitManager.ucBudgetDict[scid]! > 0.00 {
-
-                                if let _ = subCategory.userCategory {
-                                    subCategory.userCategory!.budgetAmount = ucSubmitManager.ucBudgetDict[scid]!
-                                } else {
-                                    let userCategory = UserCategory(context: viewContext)
-                                    userCategory.ucid = UUID()
-                                    userCategory.scid = subCategory.id
-                                    userCategory.budgetAmount = ucSubmitManager.ucBudgetDict[scid]!
-                                    userCategory.actualAmount = Float(0.00)
-                                    userCategory.date = Date()
-                                    subCategory.userCategory = userCategory
-                                    userCategory.subCategory = subCategory
-                                }
-                            } else {
-                                if let _ = subCategory.userCategory {
-                                    viewContext.delete(subCategory.userCategory!)
-                                }
-                            }
-                        }
-                        ucSubmitManager.ucBudgetDict.removeAll()
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        SetBudgetButtonBackground(text: "Submit Entries")
-                    }
-                    Spacer()
                 }
             }
             .navigationBarTitle("Set Budget For \(category.category)", displayMode: .inline)
             .navigationViewStyle(StackNavigationViewStyle())
-            //.navigationBarHidden(navBarHidden)
-//            .navigationBarItems(leading:
-//                                    Button("Blah Blah") {}
-//            )
             .onAppear {
                 navBarHidden = true
             }
-            
         }
-        //.navigationBarHidden(navBarHidden)
-        //.navigationBarTitle("Set Budget For \(category.category)", displayMode: .inline)
-        //.navigationBarTitle("Set Budget For \(category.category)", displayMode: .inline)
-        
     }
 }
 
@@ -100,46 +54,79 @@ struct SubCategoryView: View {
     
     @Environment(\.managedObjectContext) var viewContext
     var subCategory: SubCategoryMO
-    @EnvironmentObject var ucSubmitManager: UserCategorySubmitManager
-    @State var budgetAmountText: String
-    @FocusState var focusSubCategory: String?
+    @State var budgetAmountText: MoneyValueText
+    @FocusState var focusSubCategory: UUID?
     @State var showInvalidInputAlert: Bool = false
     
     var body: some View {
+        let floatAmount = Binding<String>(get: {
+            budgetAmountText.value
+        }, set: {
+            budgetAmountText.value = $0
+            
+            let floatBudget = Float(budgetAmountText.value) ?? 0.00
+            if floatBudget > 0.00 {
+                
+                if let _ = subCategory.userCategory {
+                    subCategory.userCategory!.budgetAmount = floatBudget
+                } else {
+                    let userCategory = UserCategory(context: viewContext)
+                    userCategory.ucid = UUID()
+                    userCategory.scid = subCategory.id
+                    userCategory.budgetAmount = floatBudget
+                    userCategory.actualAmount = Float(0.00)
+                    userCategory.date = Date()
+                    subCategory.userCategory = userCategory
+                    userCategory.subCategory = subCategory
+                }
+            } else {
+                if let _ = subCategory.userCategory {
+                    viewContext.delete(subCategory.userCategory!)
+                }
+            }
+            
+        })
+        
         VStack {
             Text("\(subCategory.subCategory ?? ""):")
                 .bold()
                 .font(.title2)
-            TextField(subCategory.subCategory ?? "", text: $budgetAmountText)
-                .focused($focusSubCategory, equals: subCategory.subCategory ?? "")
-                .onChange(of: focusSubCategory) {focusSubCategory in
-                    if focusSubCategory != nil {
-                        validateInputAndSetToDict()
-                    }
-                }
-                .onSubmit {
-                    validateInputAndSetToDict()
-                }
+            TextField(subCategory.subCategory ?? "", text: floatAmount)
+                .focused($focusSubCategory, equals: subCategory.id ?? nil)
+//                .onChange(of: focusSubCategory) {focusSubCategory in
+//                    if focusSubCategory != nil {
+//                        validateInputAndSetToDict()
+//                    }
+//                }
+//                .onReceive(budgetAmountText.publisher.last())//(budgetAmountText.publisher.last()) {
+//                {
+//                    if focusSubCategory != nil {
+//                        validateInputAndSetToDict()
+//                    }
+//                }
+//                .onSubmit {
+//                    validateInputAndSetToDict()
+//                }
                 .textFieldStyle(.roundedBorder)
         }
         .padding()
         .alert("Please Enter a Valid Input", isPresented: $showInvalidInputAlert, actions: {})
     }
-    func validateInputAndSetToDict() {
-        if let floatBudgetAmount = Float(budgetAmountText) {
-            ucSubmitManager.ucBudgetDict[subCategory.id!] = floatBudgetAmount
-            if floatBudgetAmount < 0.00 {
-                showInvalidInputAlert = true
-                focusSubCategory = subCategory.subCategory
-            }
-        } else if budgetAmountText == "" {
-            budgetAmountText = "\(0.00)"
-            ucSubmitManager.ucBudgetDict[subCategory.id!] = Float(budgetAmountText)
-        } else {
-            showInvalidInputAlert = true
-            focusSubCategory = subCategory.subCategory
-        }
-    }
+//    func validateInputAndSetToDict() {
+//        if let floatBudgetAmount = Float(budgetAmountText) {
+//            ucSubmitManager.ucBudgetDict[subCategory.id!] = floatBudgetAmount
+//            if floatBudgetAmount < 0.00 {
+//                showInvalidInputAlert = true
+//                focusSubCategory = subCategory.id
+//            }
+//        } else if budgetAmountText == "" {
+//            budgetAmountText = "\(0.00)"
+//            ucSubmitManager.ucBudgetDict[subCategory.id!] = Float(budgetAmountText)
+//        } else {
+//            showInvalidInputAlert = true
+//            focusSubCategory = subCategory.id
+//        }
+//    }
 }
 
 struct SetBudgetButtonBackground: View {

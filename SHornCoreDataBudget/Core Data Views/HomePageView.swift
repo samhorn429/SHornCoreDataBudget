@@ -34,7 +34,6 @@ struct HomePageView: View {
     ) var userTransactions: FetchedResults<UserTransaction>
     
     @EnvironmentObject var budgetManager: BudgetCategoriesManager
-    @EnvironmentObject var ucSubmitManager: UserCategorySubmitManager
     @EnvironmentObject var budgetDateManager: BudgetMonthAndYearManager
     
     @AppStorage("isPieChart") var isPieChart: Bool = true
@@ -79,7 +78,7 @@ struct HomePageView: View {
     private var nameList: [String] {
         switch(classification) {
         case .none:
-            return SubCategoryMethods.getGroups(userCategories: userCategories)
+            return SubCategoryMethods.getGroups(subCategories: subCategories)
         case .group:
             return SubCategoryMethods.getCategories(group: group ?? "", userCategories: userCategories)
         case .category:
@@ -122,7 +121,7 @@ struct HomePageView: View {
             repeats: true,
             block: {timer in
         
-                totalAngle = Angle(radians: totalAngle.radians + 0.015*Double.pi)
+                totalAngle = Angle(radians: totalAngle.radians + 0.005*Double.pi)
                 if(totalAngle.radians >= 2*Double.pi) {
                     timer.invalidate()
                 }
@@ -152,13 +151,11 @@ struct HomePageView: View {
                         group: $group,
                         category: $category,
                         payChecks: payChecks,
-                        userCategories: userCategories,
                         subCategories: subCategories,
+                        userCategories: userCategories,
                         isBudgetAmount: $isBudgetAmount,
                         transactions: userTransactions
                     )
-                    .environmentObject(budgetManager)
-                    .environmentObject(ucSubmitManager)
                     .environment(\.managedObjectContext, viewContext)
 
                    
@@ -188,7 +185,6 @@ struct HomePageView: View {
                                                 classification: .category
                                             )
                                             .environmentObject(budgetManager)
-                                            .environmentObject(ucSubmitManager)
                                             .environment(\.managedObjectContext, viewContext)
                             ) {
                                 ChartOrGraphRow(
@@ -214,7 +210,6 @@ struct HomePageView: View {
                                                 classification: .group
                                             )
                                             .environmentObject(budgetManager)
-                                            .environmentObject(ucSubmitManager)
                                             .environment(\.managedObjectContext, viewContext)
                             ) {
                                 ChartOrGraphRow(
@@ -241,7 +236,6 @@ struct HomePageView: View {
                                     BudgetView(navBarHidden: $navBarHidden)
                                     .environment(\.managedObjectContext, viewContext)
                                     .environmentObject(budgetManager)
-                                    .environmentObject(ucSubmitManager)
                                     .environmentObject(budgetDateManager)) {
                                         Text("Edit Budget")
                                     },
@@ -307,7 +301,7 @@ struct ChartOrGraphRow: View {
                 totalBudget += subCategory.userCategory?.budgetAmount ?? Float(0.00)
             }
             else {
-                totalBudget += MOFunctions.getActualSubCategoryTotal(transactions: transactions, subCategory: subCategory)
+                totalBudget += TransactionMethods.getActualSubCategoryTotal(transactions: transactions, subCategory: subCategory)
             }
         }
         return totalBudget
@@ -321,7 +315,7 @@ struct ChartOrGraphRow: View {
                 $0.subCategory == subCategory!
             })[0].userCategory?.budgetAmount ?? Float(0.00)
         } else {
-            return MOFunctions.getActualSubCategoryTotal(transactions: transactions, subCategory: subCategories.filter({
+            return TransactionMethods.getActualSubCategoryTotal(transactions: transactions, subCategory: subCategories.filter({
                                 $0.group == group &&
                                 $0.category == category! &&
                                 $0.subCategory == subCategory!

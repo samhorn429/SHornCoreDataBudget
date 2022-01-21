@@ -15,9 +15,8 @@ struct SHornCoreDataBudgetApp: App {
         WindowGroup {
             InitView()
                 .environmentObject(try! BudgetCategoriesManager())
-                .environmentObject(UserCategorySubmitManager())
-                .environmentObject(PayCheckManager())
                 .environmentObject(BudgetMonthAndYearManager())
+                .environmentObject(UserCategoryCoreDataManager())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
                 

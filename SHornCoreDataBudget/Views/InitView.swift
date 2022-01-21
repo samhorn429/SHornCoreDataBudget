@@ -12,8 +12,6 @@ struct InitView: View {
     
     @Environment(\.managedObjectContext) var viewContext
     @EnvironmentObject var budgetManager: BudgetCategoriesManager
-    @EnvironmentObject var ucSubmitManager: UserCategorySubmitManager
-    @EnvironmentObject var payCheckManager: PayCheckManager
     @EnvironmentObject var budgetDateManager: BudgetMonthAndYearManager
     
     
@@ -23,8 +21,6 @@ struct InitView: View {
                 budgetDateManager.recentBudgetYear == CurrentDateFunctions.currentYear {
                 HomePageView(classification: .none)
                      .environmentObject(budgetManager)
-                     .environmentObject(ucSubmitManager)
-                     .environmentObject(payCheckManager)
                      .environmentObject(budgetDateManager)
                      .environment(\.managedObjectContext, viewContext)
             } else {
@@ -32,7 +28,6 @@ struct InitView: View {
                     .environment(\.managedObjectContext, viewContext)
                     .environmentObject(budgetManager)
                     .environmentObject(budgetDateManager)
-                    .environmentObject(ucSubmitManager)
             }
         }
     }

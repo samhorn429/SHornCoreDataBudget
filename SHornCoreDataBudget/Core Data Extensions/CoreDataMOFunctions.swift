@@ -1,5 +1,5 @@
 //
-//  CoreDataMOFunctions.swift
+//  CoreDataTransactionMethods.swift
 //  SHornCoreDataBudget
 //
 //  Created by Sam Horn on 12/12/21.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct MOFunctions {
+struct TransactionMethods {
     
     static func getTotalAmountSpent(transactions: FetchedResults<UserTransaction>) -> Float {
         var totalAmount: Float = 0.00

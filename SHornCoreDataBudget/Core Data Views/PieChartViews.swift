@@ -50,27 +50,25 @@ struct BudgetPieChart: View {
     @Binding var group: String?
     @Binding var category: String?
     var payChecks: FetchedResults<PayCheckMO>
-    var userCategories: FetchedResults<UserCategory>
     var subCategories: FetchedResults<SubCategoryMO>
-    @EnvironmentObject var budgetManager: BudgetCategoriesManager
-    @EnvironmentObject var ucSubmitManager: UserCategorySubmitManager
+    var userCategories: FetchedResults<UserCategory>
     @Binding var isBudgetAmount: Bool
     var transactions: FetchedResults<UserTransaction>
     
     var actualTotalAmount: Float {
-        return MOFunctions.getTotalAmountSpent(transactions: transactions)
+        return TransactionMethods.getTotalAmountSpent(transactions: transactions)
     }
     
     func actualGroupTotalAmount(_ group: String?) -> Float {
-        return MOFunctions.getActualGroupTotal(transactions: transactions, group: group)
+        return TransactionMethods.getActualGroupTotal(transactions: transactions, group: group)
     }
     
     func actualCategoryTotalAmount(group: String?, category: String?) -> Float {
-        return MOFunctions.getActualCategoryTotal(transactions: transactions, group: group, category: category)
+        return TransactionMethods.getActualCategoryTotal(transactions: transactions, group: group, category: category)
     }
     
     func actualSubCategoryTotalAmount(_ subCategory: SubCategoryMO) -> Float {
-        return MOFunctions.getActualSubCategoryTotal(transactions: transactions, subCategory: subCategory)
+        return TransactionMethods.getActualSubCategoryTotal(transactions: transactions, subCategory: subCategory)
     }
     
     var totalAmount: Float {
