@@ -6,6 +6,3 @@ Creating a budget is super important for financial well-being,  especially in re
 
 The app is targeted towards anyone who needs to get their finances in order, especially for millennials and gen Z’ers who are usually the ones faced with high cost of living and crippling student loans. For some people, just hearing the word “budget” is scary and anxiety-inducing, but the main goal of this app is to make it easy for users to see where their money is going.
 
-# Walkthrough
-<img
-src
